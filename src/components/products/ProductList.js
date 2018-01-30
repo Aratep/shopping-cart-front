@@ -6,9 +6,15 @@ import jwt from 'jsonwebtoken';
 import {getAllProducts, addToCart} from '../../services/product-service';
 import {getToken} from '../../services/auth-service';
 import {allProducts} from '../../actions/index';
-import {reset} from "redux-form";
 
 class ProductList extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            status: ''
+        }
+    }
 
     componentDidMount() {
         this.getApiToken();
@@ -62,11 +68,15 @@ class ProductList extends Component {
                         return response.json()
                     })
                     .then(body => {
-                        console.log(body)
+                        console.log(body);
+                        this.setState({
+                            status: body.message
+                        })
                     })
                     .catch(err => {
                         console.log(err)
                     });
+                this.setState({status: ''})
             })
         }
     }
@@ -74,6 +84,7 @@ class ProductList extends Component {
 
     render() {
         const {products, variants, count} = this.props.products;
+        const {status} = this.state;
 
         if (products === undefined || variants === undefined) {
             return <div className="w3-center">
@@ -107,7 +118,7 @@ class ProductList extends Component {
                 <div className="w3-container w3-text-grey">
                     <h2>{count} items</h2>
                 </div>
-
+                <div className='validation-error'>{status}</div>
                 <div className="w3-row w3-grayscale">
                     {
                         products.map((product, index) => {

@@ -1,4 +1,4 @@
-import {ALL_PRODUCTS, ADD_NEW_PRODUCT, REMOVE_PRODUCT, SINGLE_PRODUCT} from '../constants/constants';
+import {ALL_PRODUCTS, ADD_NEW_PRODUCT, REMOVE_PRODUCT, SINGLE_PRODUCT, USER_PRODUCTS} from '../constants/constants';
 
 let nextProdId = 0;
 export const addProduct = product => {
@@ -23,6 +23,13 @@ export const singleProduct = (product, prod_variants) => {
         type: SINGLE_PRODUCT,
         product,
         prod_variants
+    }
+};
+
+export const userProducts = (userProd) => {
+    return {
+        type: USER_PRODUCTS,
+        userProd
     }
 };
 

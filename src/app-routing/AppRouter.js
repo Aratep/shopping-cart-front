@@ -7,7 +7,8 @@ import Login from '../components/login/Login';
 import Register from '../components/register/Register';
 import ProductListContainer from '../containers/ProductList';
 import SingleProductContainer from '../containers/SingleProduct';
-import UserAccount from '../components/user-account/UserAccount';
+import UserAccountContainer from '../containers/UserAccount';
+// import UserAccount from '../components/user-account/UserAccount';
 import {NoMatch} from '../components/404/NoMatch';
 
 export const AppRouting = () => (
@@ -20,7 +21,7 @@ export const AppRouting = () => (
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
             <Route path="/products-list" component={ProductListContainer}/>
-            <PrivateRoute path="/my-account" component={UserAccount}/>
+            <PrivateRoute path="/my-account" component={UserAccountContainer}/>
             <Route path="/product-list/product/:id" component={SingleProductContainer}/>
             {/*<PrivateRoute exact path="/product/:id" component={SingleProductContainer}/>*/}
             {/*<Route path="/add-new-product" component={AddNewProduct}/>*/}

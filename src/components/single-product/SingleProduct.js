@@ -66,7 +66,7 @@ class SingleProduct extends Component {
                                 console.log(prod)
                                 return <div key={ind} className=''>
                                     <h1>{prod.name}</h1>
-                                    <img src={prod.imagePath}/>
+                                    <img src={prod.imagePath} alt={prod.name}/>
                                     <div><b>Price:</b> {prod.price}</div>
                                     <div><b>Available Quantity:</b> {prod.available_quantity}</div>
                                     <div><b>Status:</b> <b>{prod.status}</b></div>
@@ -83,7 +83,7 @@ class SingleProduct extends Component {
                                     console.log(variant)
                                     return <div key={index} className='w3-container'>
                                         <div className='w3-display-container'>
-                                            <img src={variant.variant_image_path}/>
+                                            <img src={variant.variant_image_path} alt={variant.variant_name}/>
                                             <div><b>Variant Name:</b> {variant.variant_name}</div>
                                             <div><b>Variant Price:</b> {variant.variant_price}</div>
                                             <div><b>Variant Status:</b> <b>{variant.variant_status}</b></div>

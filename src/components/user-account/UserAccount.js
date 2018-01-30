@@ -1,22 +1,14 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-
-import {getAllProducts, getCartList} from '../../services/product-service';
 import jwt from "jsonwebtoken";
 
+import {getAllProducts, getCartList} from '../../services/product-service';
+import {userProducts} from '../../actions/index';
+
 class UserAccount extends Component {
-    constructor() {
-        super();
-
-        this.state = {
-            ids: [],
-            variants: []
-        }
-    }
-
     componentDidMount() {
         this.userCartList();
-        this.getProductList();
+        // this.getProductList();
     }
 
     getProductList = () => {
@@ -27,11 +19,6 @@ class UserAccount extends Component {
             })
             .then(products => {
                 console.log(products);
-                console.log(this.state.ids)
-                // const product = body.products.filter(prod => prod._id === id);
-                // const variants = products.variants.filter(variant => variant.prod_id === id);
-
-
             })
             .catch((err) => {
                 console.log(err)
@@ -40,28 +27,33 @@ class UserAccount extends Component {
 
     userCartList = () => {
         const currentUserToken = localStorage.getItem('userToken');
+        const {dispatch} = this.props;
 
         if (currentUserToken) {
             jwt.verify(currentUserToken, 'secret_key', (err, user) => {
                 if (err) console.log(err);
-                const user_id = user._id;
+                if (user) {
+                    const user_id = user._id;
 
-                getCartList(JSON.stringify({user_id}))
-                    .then(response => {
-                        return response.json()
-                    })
-                    .then(body => {
-                        console.log(body)
-                        this.setState({ids: body.ids})
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    });
+                    getCartList(JSON.stringify({user_id}))
+                        .then(response => {
+                            return response.json()
+                        })
+                        .then(body => {
+                            console.log(body)
+                            //must be dispatch
+                            dispatch(userProducts(body.userProduct))
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        });
+                }
             })
         }
     }
 
     render() {
+        console.log(this.props)
         return (
             <div>
 

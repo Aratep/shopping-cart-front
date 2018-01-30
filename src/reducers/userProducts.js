@@ -1,10 +1,10 @@
 // import {SINGLE_PRODUCT, REMOVE_PRODUCT} from '../constants/constants'
-import {SINGLE_PRODUCT} from '../constants/constants'
+import {USER_PRODUCTS} from '../constants/constants'
 
-const product = (state = [], action) => {
+const userProducts = (state = [], action) => {
     switch (action.type) {
-        case SINGLE_PRODUCT:
-            return {...state,  product: action.product, prod_variants: action.prod_variants};
+        case USER_PRODUCTS:
+            return {...state,  userProd: action.userProd};
         // case REMOVE_PRODUCT:
         //     return {...state, products: state.products.filter(prod => prod._id !== action.id), count: state.count-1};
         default:
@@ -14,4 +14,4 @@ const product = (state = [], action) => {
 
 
 
-export default product
+export default userProducts
