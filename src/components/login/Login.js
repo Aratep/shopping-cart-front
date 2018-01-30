@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {reset} from 'redux-form';
-import jwt from 'jsonwebtoken';
+import {Redirect} from 'react-router-dom';
 
 import LoginTemplate from './LoginTemplate';
 import {login, getToken} from '../../services/auth-service';
@@ -10,9 +10,9 @@ class Login extends Component {
         super();
 
         this.state = {
+            token: null,
             loginStatus: '',
-            redirectToReferrer: false,
-            token: null
+            redirectToReferrer: false
         }
     }
 
@@ -35,53 +35,46 @@ class Login extends Component {
     }
 
     handleSubmit = (values, dispatch) => {
-        const {token} = this.state;
         const username = values.username;
         const password = values.password;
+        const token = this.state.token;
 
-        login(JSON.stringify({username, password, token}))
-            .then(response => {
-                console.log(response.status)
-                if (response.status === 200) {
-                    dispatch(reset('loginForm'));
+            login(JSON.stringify({username, password, token}))
+                .then(response => {
+                    if (response.status === 200) {
+                        dispatch(reset('loginForm'));
+                        this.setState({
+                            loginStatus: '',
+                            redirectToReferrer: true
+                        })
+                    }
+                    return response.json()
+                })
+                .then(body => {
                     this.setState({
-                        registerStatus: '',
-                    })
-                }
-                console.log(response)
-
-                return response.json()
-            })
-            .then(body => {
-                if (body.token) {
-                    jwt.verify(body.token, 'secret_key', (err, decoded) => {
-                        if (err) console.log(err);
-                    })
-                }
-                this.setState({
-                    loginStatus: body.message,
-                    redirectToReferrer: true
+                        loginStatus: body.message,
+                    });
+                    localStorage.setItem('userToken', body.token);
+                    console.log(body)
                 })
-                localStorage.setItem('userToken', body.token);
-            })
-            .catch(err => {
-                console.log(err);
-                this.setState({
-                    loginStatus: 'Server is no available. Please try later',
-                })
-            });
+                .catch(err => {
+                    this.setState({
+                        loginStatus: 'Server is no available. Please try later!',
+                    });
+                    console.log(err)
+                });
         this.setState({
-            registerStatus: '',
+            loginStatus: '',
         })
     }
 
     render() {
         const {loginStatus, redirectToReferrer} = this.state;
-        const {from} = this.props.location.state || {from: {pathname: '/products/products-list'}};
+        const {from} = this.props.location.state || {from: {pathname: '/my-account'}};
 
         return (
             <LoginTemplate
-                 onSubmit={this.handleSubmit}
+                onSubmit={this.handleSubmit}
                 loginStatus={loginStatus}
                 redirectToReferrer={redirectToReferrer}
                 from={from}

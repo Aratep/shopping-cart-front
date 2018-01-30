@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import ReactLoading from 'react-loading';
+import jwt from 'jsonwebtoken';
 
-import {getAllProducts} from '../../services/product-service';
+import {getAllProducts, addToCart} from '../../services/product-service';
 import {getToken} from '../../services/auth-service';
 import {allProducts} from '../../actions/index';
+import {reset} from "redux-form";
 
 class ProductList extends Component {
 
@@ -41,6 +43,33 @@ class ProductList extends Component {
                 console.log(err)
             });
     };
+
+    addToCart = (prod_id) => {
+        const currentUserToken = localStorage.getItem('userToken');
+
+        if (currentUserToken) {
+            jwt.verify(currentUserToken, 'secret_key', (err, user) => {
+                if (err) console.log(err);
+                const user_id = user._id;
+
+                addToCart(JSON.stringify({prod_id, user_id}))
+                    .then(response => {
+                        console.log(response);
+
+                        if (response.status === 200) {
+                            console.log('okayyyyyyyy!!!')
+                        }
+                        return response.json()
+                    })
+                    .then(body => {
+                        console.log(body)
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    });
+            })
+        }
+    }
 
 
     render() {
@@ -94,9 +123,10 @@ class ProductList extends Component {
                                             />
                                         </Link>
                                         <div className="w3-display-middle w3-display-hover">
-                                            <button className="w3-button w3-black">Add To Cart
+                                            <a onClick={this.addToCart.bind(this, product._id)}
+                                               className="w3-button w3-black">Add To Cart
                                                 <i className="fa fa-shopping-cart"/>
-                                            </button>
+                                            </a>
                                         </div>
                                         <p>{product.name}<br/><b>${product.price}</b></p>
                                     </div>

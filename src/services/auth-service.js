@@ -19,10 +19,10 @@ import {
 } from '../constants/constants';
 
 export const AuthButton = withRouter(({history}) => (
-    <a className='pointer' onClick={() => {
-        localStorage.removeItem('_token');
+    <span className='pointer' onClick={() => {
+        localStorage.removeItem('userToken');
         return history.push('/login')
-    }}>Sign Out</a>
+    }}>Sign Out</span>
 ));
 
 export const registration = (body) => {

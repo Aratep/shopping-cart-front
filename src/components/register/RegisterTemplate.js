@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import {renderField} from '../../tag-creator/TagCreator';
 import validate from '../../validators/register';
@@ -8,7 +8,7 @@ import validate from '../../validators/register';
 class RegisterTemplate extends Component {
     render() {
         // const {handleSubmit, regStatus, redirectToReferrer, from} = this.props;
-        const {handleSubmit, regStatus} = this.props;
+        const {handleSubmit, regStatus,redirectToReferrer, from} = this.props;
         // console.log(redirectToReferrer);
 
 
@@ -84,9 +84,9 @@ class RegisterTemplate extends Component {
                         <Link to='/login' className="to_register"> Go and log in </Link>
                     </p>
                 </div>
-                {/*{*/}
-                {/*redirectToReferrer === true && <Redirect to={from}/>*/}
-                {/*}*/}
+                {
+                redirectToReferrer === true && <Redirect to={from}/>
+                }
             </div>
         );
     }

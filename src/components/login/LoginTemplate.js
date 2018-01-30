@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 import {renderField} from '../../tag-creator/TagCreator';
 import validate from '../../validators/login';
 
 class LoginTemplate extends Component {
     render() {
-        const {handleSubmit, loginStatus, redirectToReferrer, from} = this.props;
+        const {handleSubmit, loginStatus, redirectToReferrer} = this.props;
         // const {handleSubmit} = this.props;
         // console.log(redirectToReferrer);
 
@@ -58,9 +58,9 @@ class LoginTemplate extends Component {
                         <Link to='/register'>Join us</Link>
                     </p>
                 </div>
-                {/*{*/}
-                {/*redirectToReferrer === true && <Redirect to={from}/>*/}
-                {/*}*/}
+                {
+                    redirectToReferrer === true && <Redirect to='/my-account'/>
+                }
             </div>
         );
     }

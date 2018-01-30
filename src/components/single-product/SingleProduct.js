@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import jwt from 'jsonwebtoken';
+import {Link} from 'react-router-dom';
 import ReactLoading from 'react-loading';
 
 import {getAllProducts} from '../../services/product-service';
 import {getToken} from '../../services/auth-service';
-import { singleProduct} from "../../actions";
+import {singleProduct} from "../../actions";
 
 class SingleProduct extends Component {
 
@@ -45,41 +45,57 @@ class SingleProduct extends Component {
             .catch(err => {
                 console.log(err)
             });
-    }
+    };
+
 
     render() {
         const {product} = this.props;
 
-        if(product.length <=0 ){
+        if (product.length <= 0) {
             return <ReactLoading color='black'/>
         }
         // console.log(product.product)
-        // console.log(product.prod_variants)
+        console.log(product.prod_variants)
 
         return (
-            <div className='w3-center'>
-                <h1>Single product</h1>
-                <div>
-                    {
-                        product.product.map((prod, ind) => {
-                            console.log(prod)
-                            return <div key={ind} className=''>
-                                <img src={prod.imagePath}/>
-                                <div>Price: <b>{prod.price}</b></div>
-                                <div>Available Quantity: <b>{prod.available_quantity}</b></div>
-                                <div>Status: <b>{prod.status}</b></div>
-                                <div>Product Description: <b>{prod.description}</b></div>
-                                {
-                                    product.prod_variants.map((variant, index) => {
-                                        return <div key={index}>
-
+            <div>
+                <div className=''>
+                    <div>
+                        {
+                            product.product.map((prod, ind) => {
+                                console.log(prod)
+                                return <div key={ind} className=''>
+                                    <h1>{prod.name}</h1>
+                                    <img src={prod.imagePath}/>
+                                    <div><b>Price:</b> {prod.price}</div>
+                                    <div><b>Available Quantity:</b> {prod.available_quantity}</div>
+                                    <div><b>Status:</b> <b>{prod.status}</b></div>
+                                    <div><b>Product Description:</b> {prod.description}</div>
+                                </div>
+                            })
+                        }
+                        <div className=' '>
+                            {
+                                product.prod_variants.length <= 0 ? <h3>Have No Variants</h3> :
+                                    <h3>Product's Variants</h3>}
+                            {
+                                product.prod_variants.map((variant, index) => {
+                                    console.log(variant)
+                                    return <div key={index} className='w3-container'>
+                                        <div className='w3-display-container'>
+                                            <img src={variant.variant_image_path}/>
+                                            <div><b>Variant Name:</b> {variant.variant_name}</div>
+                                            <div><b>Variant Price:</b> {variant.variant_price}</div>
+                                            <div><b>Variant Status:</b> <b>{variant.variant_status}</b></div>
                                         </div>
-                                    })
-                                }
-                            </div>
-                        })
-                    }
+                                    </div>
+                                })
+                            }
+
+                        </div>
+                    </div>
                 </div>
+                <Link to='/products-list'>Back</Link>
             </div>
         )
     }

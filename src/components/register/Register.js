@@ -43,7 +43,7 @@ class Register extends Component {
 
     render() {
         const {regStatus, redirectToReferrer} = this.state;
-        const {from} = this.props.location.state || {from: {pathname: '/products/products-list'}};
+        const {from} = this.props.location.state || {from: {pathname: '/my-account'}};
 
         return (
             <RegisterTemplate

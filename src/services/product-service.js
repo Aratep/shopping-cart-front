@@ -11,7 +11,9 @@ import {
     UPDATE_PRODUCT_URL,
     DELETE_PRODUCT_URL,
     PRODUCTS_LIST_URL,
-    ADMIN_LOGIN_URL
+    ADMIN_LOGIN_URL,
+    ADD_TO_CART_URL,
+    GET_CART_LIST_URL
 } from '../constants/constants';
 
 // export const AuthButton =  withRouter(({history}) => (
@@ -28,6 +30,7 @@ export const createProduct = (body) => {
         body: body
     })
 };
+
 
 export const deleteProduct = (body) => {
     return fetch(DELETE_PRODUCT_URL, {
@@ -53,6 +56,21 @@ export const updateItem = (body) => {
     })
 }
 
+export const addToCart = (body) => {
+    return fetch(ADD_TO_CART_URL, {
+        method: POST,
+        headers: HEADERS,
+        body: body
+    })
+};
+
+export const getCartList = (body) => {
+    return fetch(GET_CART_LIST_URL, {
+        method: POST,
+        headers: HEADERS,
+        body: body
+    })
+};
 
 // export const deleteUser = (body) => {
 //     return fetch(DELETE_USER_URL, {
