@@ -1,29 +1,24 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 import {AuthButton} from '../../services/auth-service';
 
 class Header extends Component {
-    decodeUser = (token) => {
-        console.log(token);
-        let user ;
-        if(token !== undefined) {
-            jwt.verify(token, 'secret_key', (err, decoded) => {
-                if (err) console.log(err);
-                user = decoded;
-            })
-        }
-        return user;
-    }
+    // decodeUser = (token) => {
+    //     console.log(token);
+    //     let user ;
+    //     if(token !== undefined) {
+    //         jwt.verify(token, 'secret_key', (err, decoded) => {
+    //             if (err) console.log(err);
+    //             user = decoded;
+    //         })
+    //     }
+    //     return user;
+    // }
 
     render() {
         const currentUserToken = localStorage.getItem('userToken');
-        // const currentUser = this.decodeUser(currentUserToken);
-        // if(currentUser === undefined) {
-        //     return null
-        // }
-        // console.log(currentUser);
 
         return (
             <div className='grey'>
@@ -34,14 +29,18 @@ class Header extends Component {
                         <Link to='/my-account'>
                         <span className='w3-margin-right font-size'>
                             {
-                                currentUserToken && <span className='w3-margin-right font-size'> <AuthButton/></span>
+                                currentUserToken && <span className='w3-margin-right font-size'>
+                                    <AuthButton/>
+                                </span>
                             }
                             My Account
                         </span>
                         </Link>
                         <i className="fa fa-user w3-margin-right"/>
-                        <i className="fa fa-shopping-cart w3-margin-right"/>
-                        <i className="fa fa-search"/>
+                        <Link to='/my-cart'>
+                            <i className="fa fa-shopping-cart w3-margin-right"/>
+                        </Link>
+                        {/*<i className="fa fa-search"/>*/}
                     </p>
                 </header>
             </div>

@@ -25,11 +25,13 @@ export const PRODUCTS_LIST_URL = 'http://localhost:8080/products/products-list';
 export const ADMIN_LOGIN_URL = 'http://localhost:8080/admin/login';
 export const ADD_TO_CART_URL = 'http://localhost:8080/cart/add-to-cart';
 export const GET_CART_LIST_URL = 'http://localhost:8080/cart/cart-list';
+export const DELETE_FROM_CART = 'http://localhost:8080/cart/remove-cart-product';
 
 export const ALL_PRODUCTS = 'ALL_PRODUCTS';
 export const ADD_NEW_PRODUCT = 'ADD_NEW_PRODUCT';
 export const SINGLE_PRODUCT = 'SINGLE_PRODUCT';
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 export const USER_PRODUCTS = 'USER_PRODUCTS';
-export const ALL_USERS = 'ALL_USERS';
-export const SINGLE_USER = 'SINGLE_USER';
+export const CURRENT_USER = 'CURRENT_USER';
+export const REMOVE_USER = 'REMOVE_USER';
+export const REMOVE_USER_PRODUCT = 'REMOVE_USER_PRODUCT';

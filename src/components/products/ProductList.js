@@ -12,7 +12,7 @@ class ProductList extends Component {
         super();
 
         this.state = {
-            status: ''
+            status: '',
         }
     }
 
@@ -42,7 +42,6 @@ class ProductList extends Component {
                 return response.json();
             })
             .then(products => {
-                // console.log(products);
                 dispatch(allProducts(products.products, products.variants, products.count))
             })
             .catch((err) => {
@@ -60,17 +59,15 @@ class ProductList extends Component {
 
                 addToCart(JSON.stringify({prod_id, user_id}))
                     .then(response => {
-                        console.log(response);
 
                         if (response.status === 200) {
-                            console.log('okayyyyyyyy!!!')
+                            console.log('okayyyyyyyy!!!');
                         }
                         return response.json()
                     })
                     .then(body => {
-                        console.log(body);
                         this.setState({
-                            status: body.message
+                            status: body.message,
                         })
                     })
                     .catch(err => {
@@ -91,8 +88,6 @@ class ProductList extends Component {
                 <ReactLoading color='black'/>
             </div>
         }
-        // console.log(products);
-        // console.log(variants);
 
         return (
             <div className="">
@@ -122,7 +117,6 @@ class ProductList extends Component {
                 <div className="w3-row w3-grayscale">
                     {
                         products.map((product, index) => {
-                            // console.log(product);
                             return <div className="w3-col l3 s6" key={index}>
                                 <div className="w3-container">
                                     <div className="w3-display-container">

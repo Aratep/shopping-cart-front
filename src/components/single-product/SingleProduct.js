@@ -55,7 +55,7 @@ class SingleProduct extends Component {
             return <ReactLoading color='black'/>
         }
         // console.log(product.product)
-        console.log(product.prod_variants)
+        // console.log(product.prod_variants)
 
         return (
             <div>
@@ -63,7 +63,7 @@ class SingleProduct extends Component {
                     <div>
                         {
                             product.product.map((prod, ind) => {
-                                console.log(prod)
+                                // console.log(prod)
                                 return <div key={ind} className=''>
                                     <h1>{prod.name}</h1>
                                     <img src={prod.imagePath} alt={prod.name}/>
@@ -80,7 +80,7 @@ class SingleProduct extends Component {
                                     <h3>Product's Variants</h3>}
                             {
                                 product.prod_variants.map((variant, index) => {
-                                    console.log(variant)
+                                    // console.log(variant)
                                     return <div key={index} className='w3-container'>
                                         <div className='w3-display-container'>
                                             <img src={variant.variant_image_path} alt={variant.variant_name}/>

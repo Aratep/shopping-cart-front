@@ -1,4 +1,12 @@
-import {ALL_PRODUCTS, ADD_NEW_PRODUCT, REMOVE_PRODUCT, SINGLE_PRODUCT, USER_PRODUCTS} from '../constants/constants';
+import {
+    ALL_PRODUCTS,
+    ADD_NEW_PRODUCT,
+    SINGLE_PRODUCT,
+    USER_PRODUCTS,
+    CURRENT_USER,
+    REMOVE_USER_PRODUCT,
+    REMOVE_USER
+} from '../constants/constants';
 
 let nextProdId = 0;
 export const addProduct = product => {
@@ -26,16 +34,30 @@ export const singleProduct = (product, prod_variants) => {
     }
 };
 
-export const userProducts = (userProd) => {
+export const userProducts = (userProducts) => {
     return {
         type: USER_PRODUCTS,
-        userProd
+        userProducts
     }
 };
 
-export const removeProduct = (id) => {
+export const currentUser = (currentUser) => {
     return {
-        type: REMOVE_PRODUCT,
+        type: CURRENT_USER,
+        currentUser
+    }
+};
+
+export const removeUserProd = (id) => {
+    return {
+        type: REMOVE_USER_PRODUCT,
+        id
+    }
+}
+
+export const removeUser = (id) => {
+    return {
+        type: REMOVE_USER,
         id
     }
 }

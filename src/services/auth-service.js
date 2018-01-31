@@ -18,6 +18,7 @@ import {
     tokenToVerify
 } from '../constants/constants';
 
+
 export const AuthButton = withRouter(({history}) => (
     <span className='pointer' onClick={() => {
         localStorage.removeItem('userToken');
@@ -40,6 +41,15 @@ export const login = (body) => {
         body: body
     })
 }
+
+export const userDetails = (body) => {
+    return fetch(LOGIN_URL, {
+        method: POST,
+        headers: HEADERS,
+        body: body
+    })
+}
+
 
 export const updateUser = (body) => {
     return fetch(EDIT_USER_URL, {

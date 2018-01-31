@@ -1,6 +1,3 @@
-// import React from 'react';
-// import {withRouter} from 'react-router-dom';
-
 import {
     POST,
     PUT,
@@ -13,15 +10,9 @@ import {
     PRODUCTS_LIST_URL,
     ADMIN_LOGIN_URL,
     ADD_TO_CART_URL,
-    GET_CART_LIST_URL
+    GET_CART_LIST_URL,
+    DELETE_FROM_CART
 } from '../constants/constants';
-
-// export const AuthButton =  withRouter(({history}) => (
-//     <a className='pointer' onClick={() => {
-//         localStorage.removeItem('_token');
-//         return history.push('/login')
-//     }}>Sign Out</a>
-// ));
 
 export const createProduct = (body) => {
     return fetch(CREATE_PRODUCT_URL, {
@@ -72,13 +63,13 @@ export const getCartList = (body) => {
     })
 };
 
-// export const deleteUser = (body) => {
-//     return fetch(DELETE_USER_URL, {
-//         method: DELETE,
-//         headers: HEADERS,
-//         body: body
-//     })
-// }
+export const deleteFromCart = (body) => {
+    return fetch(DELETE_FROM_CART, {
+        method: DELETE,
+        headers: HEADERS,
+        body: body
+    })
+}
 
 export const getAllProducts = () => {
     return fetch(PRODUCTS_LIST_URL, {
