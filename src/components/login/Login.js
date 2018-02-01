@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {reset} from 'redux-form';
-// import {Redirect} from 'react-router-dom';
 
 import LoginTemplate from './LoginTemplate';
 import {login, getToken} from '../../services/auth-service';

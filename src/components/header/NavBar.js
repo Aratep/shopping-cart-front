@@ -19,8 +19,8 @@ class NavBar extends Component {
                         </h3>
                     </div>
                     <div className="w3-padding-64 w3-large w3-text-grey" style={{fontWeight: "bold"}}>
-                        <a className="w3-bar-item w3-button">Men</a>
-                        <a className="w3-bar-item w3-button">Women</a>
+                        {/*<a className="w3-bar-item w3-button">Men</a>*/}
+                        {/*<a className="w3-bar-item w3-button">Women</a>*/}
                     </div>
                     <a className="w3-bar-item w3-button w3-padding">Newsletter</a>
                     <a className="w3-bar-item w3-button w3-padding">Subscribe</a>

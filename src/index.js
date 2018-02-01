@@ -5,9 +5,13 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {BrowserRouter as Router} from 'react-router-dom';
 
+import ScrollToTop from './app-routing/ScrollToTop';
+
 ReactDOM.render(
     <Router>
-        <App />
+        <ScrollToTop>
+            <App/>
+        </ScrollToTop>
     </Router>,
     document.getElementById('root'));
 registerServiceWorker();

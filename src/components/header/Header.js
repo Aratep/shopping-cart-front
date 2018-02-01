@@ -19,12 +19,15 @@ class Header extends Component {
 
     render() {
         const currentUserToken = localStorage.getItem('userToken');
+        // console.log(currentUserToken);
 
         return (
             <div className='grey'>
                 <div className="w3-hide-large" style={{marginTop: 83 + "px"}}/>
                 <header className="w3-container w3-xlarge">
-                    <p className="w3-left">Watch</p>
+                    <p className="w3-left ">
+                        <Link to='/products-list' className='decor-non'>Products</Link>
+                    </p>
                     <p className="w3-right">
                         <Link to='/my-account'>
                         <span className='w3-margin-right font-size'>

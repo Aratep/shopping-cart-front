@@ -45,8 +45,6 @@ class UserCart extends Component {
 
     deleteProdFromCart = (prod_id) => {
         const currentUserToken = localStorage.getItem('userToken');
-        // const {dispatch} = this.props;
-        // console.log(prod_id);
 
         jwt.verify(currentUserToken, 'secret_key', (err, user) => {
             if (err) console.log(err);
@@ -59,8 +57,6 @@ class UserCart extends Component {
                     })
                     .then(body => {
                         console.log(body)
-                        //must be dispatch
-                        // dispatch(removeUserProd(prod_id))
                     })
                     .catch(err => {
                         console.log(err)
@@ -75,35 +71,38 @@ class UserCart extends Component {
         if (userProducts === undefined) {
             return <ReactLoading color='black'/>
         }
-        // console.log(typeof userProducts);
 
         return (
             <div>
                 {
-                    userProducts.length <= 0 && <h2>Your Cart is Empty</h2>
+                    userProducts.length <= 0 ? <h2>Your Cart is Empty</h2> : <h1>My Cart</h1>
                 }
                 {
                     userProducts.map((prod, index) => {
                         // console.log(prod);
 
-                        return <div key={index} className='row'>
-                            <h1>My Cart</h1>
-                            <div className='column'>
-                                <h2>{prod.name}</h2>
-                                <img src={prod.imagePath} alt={prod.name} className='img-style'/>
-                                <div><b>Price:</b> {prod.price}</div>
-                                <div><b>Available Quantity:</b> {prod.available_quantity}</div>
-                                <div><b>Status:</b> <b>{prod.status}</b></div>
-                                <div><b>Product Description:</b> {prod.description}</div>
+                        return <div key={index} className='' >
+
+                            <div className=''>
+                                <div>
+                                    <h2>{prod.name}</h2>
+                                    <div className=''>
+                                        <img src={prod.imagePath} alt={prod.name} className='img-style'/>
+                                        <div><b>Price:</b> {prod.price}</div>
+                                        <div><b>Available Quantity:</b> {prod.available_quantity}</div>
+                                        <div><b>Status:</b> <b>{prod.status}</b></div>
+                                        {/*<div><b>Product Description:</b> {prod.description}</div>*/}
+                                    </div>
+                                </div>
+                                <a onClick={this.deleteProdFromCart.bind(this, prod._id)}
+                                   className='w3-button w3-red'>
+                                    remove
+                                </a>
                             </div>
-                            <a onClick={this.deleteProdFromCart.bind(this, prod._id)}
-                               className='w3-button w3-red'>
-                                remove
-                            </a>
                         </div>
                     })
                 }
-                <Link to='/products-list'>Back</Link>
+                <Link to='/products-list' className='w3-button w3-black w3-round-large'>Back</Link>
             </div>
         )
     }

@@ -45,7 +45,7 @@ class UserAccount extends Component {
                         </div>
                     })
                 }
-                <Link to='/products-list'>Back</Link>
+                <Link to='/products-list' className='w3-button w3-black w3-round-large'>Back</Link>
             </div>
         )
     }

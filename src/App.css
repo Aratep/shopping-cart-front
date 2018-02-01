@@ -43,7 +43,7 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
 }
 
 .margin {
-    margin-bottom: 40px
+    margin-bottom: 40px;
 }
 
 /*login*/
@@ -93,3 +93,13 @@ body, h1, h2, h3, h4, h5, h6, .w3-wide {
     margin: 0 auto;
 }
 
+.decor-non {
+    text-decoration: none;
+}
+
+.floating-box {
+    float: left;
+    /*margin: 10px;*/
+    border: 3px solid black;
+    display: inline-block;
+}

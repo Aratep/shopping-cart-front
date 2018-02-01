@@ -8,7 +8,7 @@ import validate from '../../validators/login';
 class LoginTemplate extends Component {
     render() {
         const {handleSubmit, loginStatus, redirectToReferrer} = this.props;
-        console.log(redirectToReferrer)
+        // console.log(redirectToReferrer);
 
         return (
             <div className="container">
