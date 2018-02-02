@@ -20,7 +20,7 @@ import {
 
 
 export const AuthButton = withRouter(({history}) => (
-    <span className='pointer' onClick={() => {
+    <span className='pointer text-decor' onClick={() => {
         localStorage.removeItem('userToken');
         return history.push('/login')
     }}>Sign Out</span>
@@ -93,7 +93,6 @@ export const uploadFile = (body) => {
         body: body
     })
 }
-
 
 export const getToken = () => {
     return fetch(TOKEN_URL, {

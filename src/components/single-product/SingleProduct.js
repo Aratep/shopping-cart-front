@@ -3,13 +3,11 @@ import {Link} from 'react-router-dom';
 import ReactLoading from 'react-loading';
 
 import {getAllProducts} from '../../services/product-service';
-import {getToken} from '../../services/auth-service';
 import {singleProduct} from "../../actions";
 
 class SingleProduct extends Component {
 
     componentDidMount() {
-        this.getApiToken();
         this.getProductList();
     }
 
@@ -22,11 +20,8 @@ class SingleProduct extends Component {
                 return response.json();
             })
             .then(products => {
-                // console.log(products);
                 const product = products.products.filter(prod => prod._id === id);
                 const variants = products.variants.filter(variant => variant.prod_id === id);
-                // console.log(product);
-                // console.log(variant);
                 dispatch(singleProduct(product, variants))
             })
             .catch((err) => {
@@ -34,28 +29,12 @@ class SingleProduct extends Component {
             });
     };
 
-    getApiToken = () => {
-        getToken()
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-                this.setState({token: body.token})
-            })
-            .catch(err => {
-                console.log(err)
-            });
-    };
-
-
     render() {
         const {product} = this.props;
 
         if (product.length <= 0) {
-            return <ReactLoading color='black'/>
+            return <ReactLoading color='black' type='spokes' className="center"/>
         }
-        // console.log(product.product)
-        // console.log(product.prod_variants)
 
         return (
             <div>
@@ -63,10 +42,9 @@ class SingleProduct extends Component {
                     <div>
                         {
                             product.product.map((prod, ind) => {
-                                // console.log(prod)
-                                return <div key={ind} className=''>
+                                return <div key={ind} className='box'>
                                     <h1>{prod.name}</h1>
-                                    <img src={prod.imagePath} alt={prod.name}/>
+                                    <img src={prod.imagePath} alt={prod.name} className='img-style'/>
                                     <div><b>Price:</b> {prod.price}</div>
                                     <div><b>Available Quantity:</b> {prod.available_quantity}</div>
                                     <div><b>Status:</b> <b>{prod.status}</b></div>
@@ -80,10 +58,11 @@ class SingleProduct extends Component {
                                     <h3>Product's Variants</h3>}
                             {
                                 product.prod_variants.map((variant, index) => {
-                                    // console.log(variant)
-                                    return <div key={index} className='w3-container'>
-                                        <div className='w3-display-container'>
-                                            <img src={variant.variant_image_path} alt={variant.variant_name}/>
+                                    return <div key={index} className='box'>
+                                        <div className=''>
+                                            <img src={variant.variant_image_path}
+                                                 alt={variant.variant_name}
+                                                 className='img-style'/>
                                             <div><b>Variant Name:</b> {variant.variant_name}</div>
                                             <div><b>Variant Price:</b> {variant.variant_price}</div>
                                             <div><b>Variant Status:</b> <b>{variant.variant_status}</b></div>
@@ -95,7 +74,7 @@ class SingleProduct extends Component {
                         </div>
                     </div>
                 </div>
-                <Link to='/products-list'>Back</Link>
+                <Link to='/products-list' className='w3-button w3-black w3-round-large'>Back</Link>
             </div>
         )
     }

@@ -6,7 +6,7 @@ export const DELETE = 'DELETE';
 export const HEADERS = {
     'Accept': 'application/json',
     'Content-Type': 'application/json; charset=utf-8',
-    'x-access-token': {tokenToVerify},
+    'x-access-token': {tokenToVerify}
 };
 
 export const REGISTER_URL = 'http://localhost:8080/users/register';
@@ -15,7 +15,7 @@ export const RESET_PASSWD_URL = 'http://localhost:8080/users/reset_password';
 export const EDIT_USER_URL = 'http://localhost:8080/users/edit_user';
 export const DELETE_USER_URL = 'http://localhost:8080/users/delete_single_user';
 export const ALL_USERS_URL = 'http://localhost:8080/users/list_all_users';
-export const TOKEN_URL = 'http://localhost:8080/users/token';
+export const TOKEN_URL = 'http://localhost:8080/token';
 export const UPLOAD_FILE_URL = 'http://localhost:8080/upload_file';
 
 export const CREATE_PRODUCT_URL = 'http://localhost:8080/products/create';

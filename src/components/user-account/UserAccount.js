@@ -27,12 +27,13 @@ class UserAccount extends Component {
     render() {
         const {currentUser} = this.props;
 
-        if(currentUser.length <= 0) {
-            return <ReactLoading color='black'/>
+        if (currentUser.length <= 0) {
+            return <ReactLoading color='black' type='spokes' className="center"/>
         }
 
         return (
             <div>
+                <h1>My Profile</h1>
                 {
                     Object.values(currentUser).map((user, ind) => {
                         return <div key={ind}>
@@ -45,7 +46,9 @@ class UserAccount extends Component {
                         </div>
                     })
                 }
-                <Link to='/products-list' className='w3-button w3-black w3-round-large'>Back</Link>
+                <div>
+                    <Link to='/products-list' className='w3-button w3-black w3-round-large'>Back</Link>
+                </div>
             </div>
         )
     }

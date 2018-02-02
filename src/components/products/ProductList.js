@@ -84,8 +84,8 @@ class ProductList extends Component {
         const {status} = this.state;
 
         if (products === undefined || variants === undefined) {
-            return <div className="w3-center">
-                <ReactLoading color='black'/>
+            return <div >
+                <ReactLoading color='black' type='spokes' className="center"/>
             </div>
         }
 
@@ -117,13 +117,12 @@ class ProductList extends Component {
                 <div className="w3-row w3-grayscale">
                     {
                         products.map((product, index) => {
-                            return <div className="w3-col l3 s6" key={index}>
+                            return <div className="w3-col l3 s6 box" key={index}>
                                 <div className="w3-container">
                                     <div className="w3-display-container">
                                         <Link to={`/product-list/product/${product._id}`}>
                                             <img src={product.imagePath}
                                                  alt={product.imagePath}
-                                                 style={{width: 100 + "%"}}
                                                  className='img-style'
                                             />
                                         </Link>
@@ -133,7 +132,7 @@ class ProductList extends Component {
                                                 <i className="fa fa-shopping-cart"/>
                                             </a>
                                         </div>
-                                        <p>{product.name}<br/><b>${product.price}</b></p>
+                                        <h3>{product.name}</h3><b>${product.price}</b>
                                     </div>
                                 </div>
                             </div>

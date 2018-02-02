@@ -1,25 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-// import jwt from 'jsonwebtoken';
 
 import {AuthButton} from '../../services/auth-service';
 
 class Header extends Component {
-    // decodeUser = (token) => {
-    //     console.log(token);
-    //     let user ;
-    //     if(token !== undefined) {
-    //         jwt.verify(token, 'secret_key', (err, decoded) => {
-    //             if (err) console.log(err);
-    //             user = decoded;
-    //         })
-    //     }
-    //     return user;
-    // }
-
     render() {
         const currentUserToken = localStorage.getItem('userToken');
-        // console.log(currentUserToken);
 
         return (
             <div className='grey'>
@@ -29,21 +15,22 @@ class Header extends Component {
                         <Link to='/products-list' className='decor-non'>Products</Link>
                     </p>
                     <p className="w3-right">
-                        <Link to='/my-account'>
                         <span className='w3-margin-right font-size'>
                             {
-                                currentUserToken && <span className='w3-margin-right font-size'>
+                                currentUserToken ? <span className='w3-margin-right font-size'>
                                     <AuthButton/>
+                                </span> : <span className='w3-margin-right font-size'>
+                                    <Link to='/login'>Sign In</Link>
                                 </span>
                             }
-                            My Account
                         </span>
+                        <Link to='/my-account' className=' w3-margin-right'>
+                            {/*My Account*/}
+                            <i className="fa fa-user w3-margin-right"/>
                         </Link>
-                        <i className="fa fa-user w3-margin-right"/>
                         <Link to='/my-cart'>
                             <i className="fa fa-shopping-cart w3-margin-right"/>
                         </Link>
-                        {/*<i className="fa fa-search"/>*/}
                     </p>
                 </header>
             </div>

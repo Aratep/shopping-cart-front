@@ -69,7 +69,7 @@ class UserCart extends Component {
     render() {
         const {userProducts} = this.props.userProducts;
         if (userProducts === undefined) {
-            return <ReactLoading color='black'/>
+            return <ReactLoading color='black' type='spokes' className="center"/>
         }
 
         return (
@@ -81,7 +81,7 @@ class UserCart extends Component {
                     userProducts.map((prod, index) => {
                         // console.log(prod);
 
-                        return <div key={index} className='' >
+                        return <div key={index} className='box'>
 
                             <div className=''>
                                 <div>
@@ -102,7 +102,9 @@ class UserCart extends Component {
                         </div>
                     })
                 }
-                <Link to='/products-list' className='w3-button w3-black w3-round-large'>Back</Link>
+                <div className='after-box'>
+                    <Link to='/products-list' className='w3-button w3-black w3-round-large'>Back</Link>
+                </div>
             </div>
         )
     }

@@ -5,7 +5,7 @@ class NavBar extends Component {
     render() {
         return (
             <div>
-                <nav className="w3-sidebar w3-bar-block w3-white w3-collapse w3-top"
+                <nav className="w3-sidebar w3-bar-block back-color w3-collapse w3-top"
                      style={{Zindex: "3", width: 250 + "px"}}
                      id="mySidebar">
                     <div className="w3-container w3-display-container w3-padding-16">
@@ -19,8 +19,6 @@ class NavBar extends Component {
                         </h3>
                     </div>
                     <div className="w3-padding-64 w3-large w3-text-grey" style={{fontWeight: "bold"}}>
-                        {/*<a className="w3-bar-item w3-button">Men</a>*/}
-                        {/*<a className="w3-bar-item w3-button">Women</a>*/}
                     </div>
                     <a className="w3-bar-item w3-button w3-padding">Newsletter</a>
                     <a className="w3-bar-item w3-button w3-padding">Subscribe</a>
@@ -35,9 +33,6 @@ class NavBar extends Component {
                                 className='logo' alt="logo"/>
                         </Link>
                     </div>
-                    <a className="w3-bar-item w3-button w3-padding-24 w3-right">
-                        <i className="fa fa-bars"/>
-                    </a>
                 </header>
             </div>
 

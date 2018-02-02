@@ -11,7 +11,8 @@ class Login extends Component {
         this.state = {
             token: null,
             loginStatus: '',
-            redirectToReferrer: false
+            redirectToReferrer: false,
+            loading: false
         }
     }
 
@@ -38,32 +39,36 @@ class Login extends Component {
         const password = values.password;
         const token = this.state.token;
 
-            login(JSON.stringify({username, password, token}))
-                .then(response => {
-                    if (response.status === 200) {
-                        dispatch(reset('loginForm'));
+        login(JSON.stringify({username, password, token}))
+            .then(response => {
+                if (response.status === 200) {
+                    dispatch(reset('loginForm'));
+                    setTimeout(() => {
                         this.setState({
                             loginStatus: '',
-                            redirectToReferrer: true
+                            redirectToReferrer: true,
+                            loading: false
                         })
-                    }
-                    return response.json()
-                })
-                .then(body => {
-                    this.setState({
-                        loginStatus: body.message,
-                    });
-                    localStorage.setItem('userToken', body.token);
-                    console.log(body)
-                })
-                .catch(err => {
-                    this.setState({
-                        loginStatus: 'Server is no available. Please try later!',
-                    });
-                    console.log(err)
+                    }, 150)
+                }
+                return response.json()
+            })
+            .then(body => {
+                this.setState({
+                    loginStatus: body.message,
                 });
+                localStorage.setItem('userToken', body.token);
+            })
+            .catch(err => {
+                this.setState({
+                    loginStatus: 'Server is no available. Please try later!',
+                    loading: true
+                });
+                console.log(err)
+            });
         this.setState({
             loginStatus: '',
+            loading: false
         })
     }
 
