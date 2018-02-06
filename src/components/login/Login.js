@@ -54,6 +54,7 @@ class Login extends Component {
                 return response.json()
             })
             .then(body => {
+                console.log(body)
                 this.setState({
                     loginStatus: body.message,
                 });

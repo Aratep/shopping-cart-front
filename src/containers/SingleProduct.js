@@ -4,7 +4,6 @@ import SingleProduct from '../components/single-product/SingleProduct';
 
 const mapStateToProps = (state) => ({
     product: state.product,
-    prod_variants: state.prod_variants,
 });
 
 const SingleProductContainer = connect(

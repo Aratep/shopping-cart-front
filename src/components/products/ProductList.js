@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 
 import {getAllProducts, addToCart} from '../../services/product-service';
 import {getToken} from '../../services/auth-service';
-import {allProducts} from '../../actions/index';
+import {allProducts, userProducts} from '../../actions/index';
 
 class ProductList extends Component {
     constructor() {
@@ -13,6 +13,7 @@ class ProductList extends Component {
 
         this.state = {
             status: '',
+            token: null
         }
     }
 
@@ -27,7 +28,8 @@ class ProductList extends Component {
                 return response.json()
             })
             .then(body => {
-                localStorage.setItem('tokenToVerify', body.token)
+
+                this.setState({token: body.token})
             })
             .catch(err => {
                 console.log(err)
@@ -42,7 +44,8 @@ class ProductList extends Component {
                 return response.json();
             })
             .then(products => {
-                dispatch(allProducts(products.products, products.variants, products.count))
+                // console.log(products)
+                dispatch(allProducts(products.products, products.count))
             })
             .catch((err) => {
                 console.log(err)
@@ -51,21 +54,25 @@ class ProductList extends Component {
 
     addToCart = (prod_id) => {
         const currentUserToken = localStorage.getItem('userToken');
+        const {token} = this.state;
+        const {dispatch} = this.props;
 
         if (currentUserToken) {
             jwt.verify(currentUserToken, 'secret_key', (err, user) => {
                 if (err) console.log(err);
-                const user_id = user._id;
+                const user_id = user.user._id;
 
-                addToCart(JSON.stringify({prod_id, user_id}))
+                addToCart(JSON.stringify({prod_id, user_id, token}))
                     .then(response => {
 
                         if (response.status === 200) {
-                            console.log('okayyyyyyyy!!!');
+                            console.log('ok!!!');
                         }
                         return response.json()
                     })
                     .then(body => {
+                        console.log(body.products)
+                        dispatch(userProducts(body.products))
                         this.setState({
                             status: body.message,
                         })
@@ -80,14 +87,17 @@ class ProductList extends Component {
 
 
     render() {
-        const {products, variants, count} = this.props.products;
+        const {products, count} = this.props.products;
         const {status} = this.state;
 
-        if (products === undefined || variants === undefined) {
+        if (products === undefined || count === undefined) {
             return <div >
                 <ReactLoading color='black' type='spokes' className="center"/>
             </div>
         }
+        // console.log(products)
+        // console.log(count)
+
 
         return (
             <div className="">

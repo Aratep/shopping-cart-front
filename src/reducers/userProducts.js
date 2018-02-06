@@ -5,7 +5,7 @@ const userProducts = (state = [], action) => {
         case USER_PRODUCTS:
             return {...state,  userProducts: action.userProducts};
         case REMOVE_USER_PRODUCT:
-            console.log(state)
+            // console.log(state)
             return {...state, userProducts: state.userProducts.filter(prod => prod._id !== action.id)};
         default:
             return state

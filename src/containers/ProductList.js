@@ -4,7 +4,6 @@ import ProductList from '../components/products/ProductList';
 
 const mapStateToProps = (state) => ({
     products: state.products,
-    variants: state.variants,
     count: state.count
 });
 

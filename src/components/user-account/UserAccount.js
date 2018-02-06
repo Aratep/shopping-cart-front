@@ -18,7 +18,7 @@ class UserAccount extends Component {
             jwt.verify(currentUserToken, 'secret_key', (err, user) => {
                 if (err) console.log(err);
                 if (user) {
-                    dispatch(currentUser(user))
+                    dispatch(currentUser(user.user))
                 }
             })
         }
@@ -27,7 +27,7 @@ class UserAccount extends Component {
     render() {
         const {currentUser} = this.props;
 
-        if (currentUser.length <= 0) {
+        if (currentUser === undefined) {
             return <ReactLoading color='black' type='spokes' className="center"/>
         }
 

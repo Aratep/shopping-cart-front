@@ -19,22 +19,32 @@ class UserCart extends Component {
             jwt.verify(currentUserToken, 'secret_key', (err, user) => {
                 if (err) console.log(err);
                 if (user) {
-                    const user_id = user._id;
-
-                    getCartList(JSON.stringify({user_id}))
-                        .then(response => {
-                            return response.json()
-                        })
-                        .then(body => {
-                            //must be dispatch
-                            dispatch(userProducts(body.userProduct))
-                        })
-                        .catch(err => {
-                            console.log(err)
-                        });
+                    // console.log(user.user)
+                    // dispatch(userProducts(user.user.products))
                 }
             })
         }
+
+        // if (currentUserToken) {
+        //     jwt.verify(currentUserToken, 'secret_key', (err, user) => {
+        //         if (err) console.log(err);
+        //         if (user) {
+        //             const user_id = user._id;
+        //
+        //             getCartList(JSON.stringify({user_id}))
+        //                 .then(response => {
+        //                     return response.json()
+        //                 })
+        //                 .then(body => {
+        //                     //must be dispatch
+        //                     dispatch(userProducts(body.userProduct))
+        //                 })
+        //                 .catch(err => {
+        //                     console.log(err)
+        //                 });
+        //         }
+        //     })
+        // }
     }
 
     removeSingleProd = (id) => {
@@ -49,7 +59,8 @@ class UserCart extends Component {
         jwt.verify(currentUserToken, 'secret_key', (err, user) => {
             if (err) console.log(err);
             if (user) {
-                const user_id = user._id;
+                console.log(user.user)
+                const user_id = user.user._id;
 
                 deleteFromCart(JSON.stringify({user_id, prod_id}))
                     .then(response => {
@@ -68,6 +79,8 @@ class UserCart extends Component {
 
     render() {
         const {userProducts} = this.props.userProducts;
+        console.log(this.props.userProducts);
+
         if (userProducts === undefined) {
             return <ReactLoading color='black' type='spokes' className="center"/>
         }

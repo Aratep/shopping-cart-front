@@ -17,20 +17,18 @@ export const addProduct = product => {
     }
 }
 
-export const allProducts = (products, variants, count) => {
+export const allProducts = (products, count) => {
     return {
         type: ALL_PRODUCTS,
         products,
-        variants,
         count
     }
 };
 
-export const singleProduct = (product, prod_variants) => {
+export const singleProduct = (product) => {
     return {
         type: SINGLE_PRODUCT,
         product,
-        prod_variants
     }
 };
 

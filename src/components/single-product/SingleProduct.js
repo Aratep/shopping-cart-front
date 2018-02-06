@@ -21,8 +21,9 @@ class SingleProduct extends Component {
             })
             .then(products => {
                 const product = products.products.filter(prod => prod._id === id);
-                const variants = products.variants.filter(variant => variant.prod_id === id);
-                dispatch(singleProduct(product, variants))
+                // console.log(product)
+                // const variants = products.variants.filter(variant => variant.prod_id === id);
+                dispatch(singleProduct(product, product.variants))
             })
             .catch((err) => {
                 console.log(err)
@@ -36,39 +37,60 @@ class SingleProduct extends Component {
             return <ReactLoading color='black' type='spokes' className="center"/>
         }
 
+        // console.log(product)
+
         return (
             <div>
                 <div className=''>
                     <div>
                         {
-                            product.product.map((prod, ind) => {
-                                return <div key={ind} className='box'>
+                            product.product.map((prod, index) => {
+                                return <div key={index} className='box'>
                                     <h1>{prod.name}</h1>
                                     <img src={prod.imagePath} alt={prod.name} className='img-style'/>
                                     <div><b>Price:</b> {prod.price}</div>
                                     <div><b>Available Quantity:</b> {prod.available_quantity}</div>
                                     <div><b>Status:</b> <b>{prod.status}</b></div>
                                     <div><b>Product Description:</b> {prod.description}</div>
+                                    {
+                                        prod.variants.length <= 0 ? <h3>Have No Variants</h3> :
+                                            <h3>Product's Variants</h3>
+                                    }
+                                    {
+                                        prod.variants.map((variant, ind) => {
+                                            return <div key={ind} className='box'>
+                                                <div className=''>
+                                                    <img src={variant.variant_image_path}
+                                                         alt={variant.variant_name}
+                                                         className='img-style'/>
+                                                    <div><b>Variant Name:</b> {variant.variant_name}</div>
+                                                    <div><b>Variant Price:</b> {variant.variant_price}</div>
+                                                    <div><b>Variant Status:</b> <b>{variant.variant_status}</b></div>
+                                                </div>
+                                            </div>
+                                        })
+                                    }
                                 </div>
                             })
                         }
                         <div className=' '>
+                            {/*{*/}
+                                {/*product.prod_variants.length <= 0 ? <h3>Have No Variants</h3> :*/}
+                                    {/*<h3>Product's Variants</h3>*/}
+                            {/*}*/}
                             {
-                                product.prod_variants.length <= 0 ? <h3>Have No Variants</h3> :
-                                    <h3>Product's Variants</h3>}
-                            {
-                                product.prod_variants.map((variant, index) => {
-                                    return <div key={index} className='box'>
-                                        <div className=''>
-                                            <img src={variant.variant_image_path}
-                                                 alt={variant.variant_name}
-                                                 className='img-style'/>
-                                            <div><b>Variant Name:</b> {variant.variant_name}</div>
-                                            <div><b>Variant Price:</b> {variant.variant_price}</div>
-                                            <div><b>Variant Status:</b> <b>{variant.variant_status}</b></div>
-                                        </div>
-                                    </div>
-                                })
+                                // product.prod_variants.map((variant, index) => {
+                                //     return <div key={index} className='box'>
+                                //         <div className=''>
+                                //             <img src={variant.variant_image_path}
+                                //                  alt={variant.variant_name}
+                                //                  className='img-style'/>
+                                //             <div><b>Variant Name:</b> {variant.variant_name}</div>
+                                //             <div><b>Variant Price:</b> {variant.variant_price}</div>
+                                //             <div><b>Variant Status:</b> <b>{variant.variant_status}</b></div>
+                                //         </div>
+                                //     </div>
+                                // })
                             }
 
                         </div>
