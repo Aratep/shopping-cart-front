@@ -5,46 +5,63 @@ import ReactLoading from 'react-loading';
 
 import {getCartList, deleteFromCart} from '../../services/product-service';
 import {userProducts, removeUserProd} from '../../actions/index';
+import {getToken} from "../../services/auth-service";
 
 class UserCart extends Component {
+    constructor() {
+        super();
+
+        this.state = {
+            token: null
+        }
+    }
     componentDidMount() {
+        // this.getApiToken();
         this.userCartList();
     }
 
+    // getApiToken = () => {
+    //     getToken()
+    //         .then(response => {
+    //             return response.json()
+    //         })
+    //         .then(body => {
+    //             // console.log(body.token)
+    //             this.setState({token: body.token})
+    //         })
+    //         .catch(err => {
+    //             console.log(err)
+    //         });
+    // };
+
+
     userCartList = () => {
         const currentUserToken = localStorage.getItem('userToken');
+        const token = this.state.token;
+
         const {dispatch} = this.props;
 
         if (currentUserToken) {
             jwt.verify(currentUserToken, 'secret_key', (err, user) => {
                 if (err) console.log(err);
+
                 if (user) {
-                    // console.log(user.user)
-                    // dispatch(userProducts(user.user.products))
+                    const user_id = user.user._id;
+
+                    getCartList(JSON.stringify({user_id}))
+                        .then(response => {
+                            return response.json()
+                        })
+                        .then(body => {
+                            //must be dispatch
+                            dispatch(userProducts(body.userProducts))
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        });
                 }
             })
         }
-
-        // if (currentUserToken) {
-        //     jwt.verify(currentUserToken, 'secret_key', (err, user) => {
-        //         if (err) console.log(err);
-        //         if (user) {
-        //             const user_id = user._id;
-        //
-        //             getCartList(JSON.stringify({user_id}))
-        //                 .then(response => {
-        //                     return response.json()
-        //                 })
-        //                 .then(body => {
-        //                     //must be dispatch
-        //                     dispatch(userProducts(body.userProduct))
-        //                 })
-        //                 .catch(err => {
-        //                     console.log(err)
-        //                 });
-        //         }
-        //     })
-        // }
     }
 
     removeSingleProd = (id) => {
@@ -79,11 +96,11 @@ class UserCart extends Component {
 
     render() {
         const {userProducts} = this.props.userProducts;
-        console.log(this.props.userProducts);
 
         if (userProducts === undefined) {
             return <ReactLoading color='black' type='spokes' className="center"/>
         }
+        console.log(this.props.userProducts);
 
         return (
             <div>

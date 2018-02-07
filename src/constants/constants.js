@@ -24,7 +24,7 @@ export const DELETE_PRODUCT_URL = 'http://localhost:8080/products/delete';
 export const PRODUCTS_LIST_URL = 'http://localhost:8080/products/products-list';
 export const ADMIN_LOGIN_URL = 'http://localhost:8080/admin/login';
 export const ADD_TO_CART_URL = 'http://localhost:8080/products/add-to-cart';
-export const GET_CART_LIST_URL = 'http://localhost:8080/cart/cart-list';
+export const GET_CART_LIST_URL = 'http://localhost:8080/products/cart-list'; //cart-list
 // export const DELETE_FROM_CART = 'http://localhost:8080/cart/remove-cart-product';
 export const DELETE_FROM_CART = 'http://localhost:8080/users/remove-user-product';
 

@@ -21,8 +21,6 @@ class SingleProduct extends Component {
             })
             .then(products => {
                 const product = products.products.filter(prod => prod._id === id);
-                // console.log(product)
-                // const variants = products.variants.filter(variant => variant.prod_id === id);
                 dispatch(singleProduct(product, product.variants))
             })
             .catch((err) => {

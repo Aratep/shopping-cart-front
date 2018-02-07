@@ -24,16 +24,9 @@ class ProductList extends Component {
 
     getApiToken = () => {
         getToken()
-            .then(response => {
-                return response.json()
-            })
-            .then(body => {
-
-                this.setState({token: body.token})
-            })
-            .catch(err => {
-                console.log(err)
-            });
+            .then(response => response.json())
+            .then(body => this.setState({token: body.token}))
+            .catch(err => console.log(err));
     };
 
     getProductList = () => {
