@@ -40,7 +40,7 @@ class RegisterTemplate extends Component {
                                 className='input w3-input w3-border'
                                 type="text"
                                 htmlFor='email_reg'
-                                placeholder="username"
+                                placeholder="email"
                                 label='email'
                                 component={renderField}
                             />

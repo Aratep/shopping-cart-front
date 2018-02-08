@@ -19,6 +19,7 @@ class Register extends Component {
             .then(response => {
                 console.log(response)
                 if (response.status === 200) {
+                    console.log(response)
                     dispatch(reset('register'));
                     this.setState({
                         redirectToReferrer: true,
@@ -27,6 +28,7 @@ class Register extends Component {
                 return response.json()
             })
             .then(body => {
+                console.log(body)
                 this.setState({
                     regStatus: body.message,
                 })
